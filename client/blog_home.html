@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+<style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    width: 150px;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    height: 100%;
+    padding: 20px;
+}
+
+.sidebar h3 {
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    margin-left: 180px;
+    padding: 20px;
+}
+.sidebar ul li a#logoutBtn {
+    color: red;
+    font-weight: bold;
+}
+
+.sidebar ul li a#logoutBtn:hover {
+    color: darkred;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+#addBlogForm, #blogList {
+    margin-top: 20px;
+}
+
+input, textarea, button {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+</style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Welcome <span id="username"></span></h3>
+        <ul>
+            <li><a href="#" id="addBlog">Add Blog</a></li>
+            <li><a href="#" id="viewBlogs">View Blogs</a></li>
+            <li><a href="#" id="logoutBtn">logout</a></li>
+        </ul>
+    </div>
+    
+    <div class="content">
+        <div id="addBlogForm" style="display:none;">
+            <h3>Add New Blog</h3>
+            <input type="text" id="blogTitle" placeholder="Blog Title"><br>
+            <textarea id="blogContent" placeholder="Blog Content"></textarea><br>
+            <button id="submitBlog">Submit</button>
+        </div>
+        
+        <div id="blogList" style="display:none;">
+            <h3>All Blogs</h3>
+            <ul id="blogs"></ul>
+        </div>
+    </div>
+
+    <script type="module" src="./js/blog_home.js"></script>
+</body>
+</html>
