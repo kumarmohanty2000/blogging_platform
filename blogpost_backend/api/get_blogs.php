@@ -7,20 +7,31 @@ header('Content-Type: application/json');
 session_start();
 
 include '../db.php';
-
-if (!isset($_SESSION['user_id'])) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Unauthorized']);
-    exit();
-}
-
-$sql = "SELECT * FROM posts ORDER BY publish_date DESC";
+$sql = "SELECT b.id, b.title, b.content, b.publish_date, GROUP_CONCAT(c.name) AS categories, GROUP_CONCAT(t.name) AS tags
+        FROM blogs b
+        LEFT JOIN blog_categories bc ON b.id = bc.blog_id
+        LEFT JOIN categories c ON bc.category_id = c.id
+        LEFT JOIN blog_tags bt ON b.id = bt.blog_id
+        LEFT JOIN tags t ON bt.tag_id = t.id
+        GROUP BY b.id";
+        
 $result = $conn->query($sql);
-
-$blogs = [];
-while ($row = $result->fetch_assoc()) {
-    $blogs[] = $row;
+$blogs = array();
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $blogs[] = array(
+            'id' => $row['id'],
+            'title' => $row['title'],
+            'content' => $row['content'],
+            'publish_date' => $row['publish_date'],
+            'categories' => explode(',', $row['categories']),
+            'tags' => explode(',', $row['tags'])
+        );
+    }
 }
 
-echo json_encode("hi how are you");
+header('Content-Type: application/json');
+echo json_encode($blogs);
+
+$conn->close();
 ?>

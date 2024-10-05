@@ -58,6 +58,27 @@
 h3 {
     font-size: 24px;
 }
+button.updateBtn, button.deleteBtn {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+button.updateBtn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+button.deleteBtn {
+    background-color: #f44336;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
 
 #addBlogForm, #blogList {
     margin-top: 20px;
@@ -84,9 +105,13 @@ input, textarea, button {
     <div class="content">
         <div id="addBlogForm" style="display:none;">
             <h3>Add New Blog</h3>
-            <input type="text" id="blogTitle" placeholder="Blog Title"><br>
-            <textarea id="blogContent" placeholder="Blog Content"></textarea><br>
-            <button id="submitBlog">Submit</button>
+            <form id="createPostForm">
+                <input type="text" id="title" placeholder="Title" required><br>
+                <textarea id="content" placeholder="Content"></textarea><br>
+                <select id="categories" multiple></select><br>
+                <input type="text" id="tags" placeholder="Tags (comma-separated)"><br>
+                <button type="submit">Create Post</button>
+            </form>
         </div>
         
         <div id="blogList" style="display:none;">
@@ -95,6 +120,6 @@ input, textarea, button {
         </div>
     </div>
 
-    <script type="module" src="./js/blog_home.js"></script>
+    <script type="module" src='./js/blog_home.js'></script>
 </body>
 </html>
